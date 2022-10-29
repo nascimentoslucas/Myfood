@@ -10,11 +10,11 @@ namespace Myfood.Repositorio
 {
     public class PessoaFisicaRepo : BaseRepositorio<PessoaFisica>
     {
-        private PessoaFisicaFakeDB fakeDB = new PessoaFisicaFakeDB();
+        private FakeDataBase fakeDB = new FakeDataBase();
 
         public override PessoaFisica Create(PessoaFisica instancia)
         {
-            int id = fakeDB.PessoasFisicas.Last().Id + 1;
+            int id = fakeDB.PessoasFisicas.Count() > 0 ? fakeDB.PessoasFisicas.Last().Id + 1 : 1;
             instancia.Id = id;
             fakeDB.PessoasFisicas.Add(instancia);
             return instancia;

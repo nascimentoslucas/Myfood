@@ -32,9 +32,18 @@ namespace Myfood
                 int opcao = Convert.ToInt32(Console.ReadLine());
                 if(opcao == 1) {
                     salvarPessoaFisica(repositorio);
-                    Console.WriteLine(repositorio.ReadAll());
+                    repositorio.ReadAll().ForEach(x=> Console.WriteLine(x.Nome));
+                };
+                if(opcao == 1) {
+                    salvarRestaurante();
+                    repositorio.ReadAll().ForEach(x=> Console.WriteLine(x.Nome));
                 };
             }
+        }
+
+        private static void salvarRestaurante()
+        {
+            throw new NotImplementedException();
         }
 
         private static void salvarPessoaFisica(PessoaFisicaRepo repositorio)
