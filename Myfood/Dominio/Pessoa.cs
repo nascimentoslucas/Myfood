@@ -9,13 +9,14 @@ namespace Myfood.Dominio
 {
     public abstract class Pessoa
     {
+        private int id;
         private string nome;
         private string email;
         private DateTime dataNascimento;
         private string telefone;
         private string cidade;
         private string password;
-        private int id;
+
 
         public string Nome { get => nome; set => nome = value; }
         public string Email { get => email; set => email = value; }

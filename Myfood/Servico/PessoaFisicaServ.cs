@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace Myfood.Servico
 {
     public class PessoaFisicaServ : BaseServico<PessoaFisica>
-
     {
         private PessoaFisicaRepo repositorio;
 

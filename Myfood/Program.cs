@@ -6,17 +6,58 @@ using System.Threading.Tasks;
 using Myfood.Dominio;
 using Myfood.Repositorio;
 using Myfood.Servico;
-using Myfood.ZConsole;
 
 namespace Myfood
 {
     public class Program
     {
-        //private static BaseRepositorio;
-        private static PessoaFisicaRepo repositorio;
-        
+               
         public static void Main(string[] args)
         {
+            menu();
+        }
+
+        private static void CadastrarPessoa()
+        {
+            bool flag = false;
+            PessoaFisicaRepo repositorio = new PessoaFisicaRepo();
+
+            while (flag != true)
+            {
+
+                Console.WriteLine("1 - Fisica");
+                Console.WriteLine("2 - Juridica (Restaurante)");
+                Console.WriteLine("3 - Voltar");
+                Console.Write("\nSelecione uma das opções:");
+                int opcao = Convert.ToInt32(Console.ReadLine());
+                if(opcao == 1) {
+                    salvarPessoaFisica(repositorio);
+                    Console.WriteLine(repositorio.ReadAll());
+                };
+            }
+        }
+
+        private static void salvarPessoaFisica(PessoaFisicaRepo repositorio)
+        {
+            PessoaFisica pessoa;
+            Console.Write("Informe o nome: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Informe CPF ");
+            string cpf = Console.ReadLine();
+
+            Console.Write("Informe Cidade ");
+            string cidade = Console.ReadLine();
+
+            pessoa = new PessoaFisica(cpf,nome,"email",new DateTime(2020,9,9),"00000",cidade,"999999",0);
+
+            repositorio.Create(pessoa);
+
+            Console.WriteLine("\nPessoa Fisica Criada");
+            Console.WriteLine("...............................");
+        }
+
+        private static void menu(){
             bool flag = false;
             while (flag != true)
             {
@@ -31,10 +72,6 @@ namespace Myfood
                 Console.Write("Selecione uma das opções:");
                 int opcao = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
-
-
-
-
 
                 switch (opcao)
                 {
@@ -54,84 +91,12 @@ namespace Myfood
                     default: 
                         Console.WriteLine("Escolha uma das opcoes adequadas");
                         break;
-
-
-
-                }
-            }
-        }
-
-        private static void CadastrarPessoa()
-        {
-            bool flag = false;
-
-            while (flag != true)
-            {
-                
-                Console.WriteLine("1 - Fisica");
-                Console.WriteLine("2 - Juridica (Restaurante)");
-                Console.WriteLine("3 - Voltar");
-                Console.Write("\nSelecione uma das opções:");
-                int opcao = Convert.ToInt32(Console.ReadLine());
-                switch (opcao)
-                {
-                    case 1:
-                        PessoaFisica pessoaFisica = new PessoaFisica();
-
-                        Console.Write("Informe o nome: ");
-                        pessoaFisica.Nome = Console.ReadLine();
-
-                        Console.Write("Informe CPF ");
-                        pessoaFisica.Cpf = Console.ReadLine();
-
-                        Console.Write("Informe Cidade ");
-                        pessoaFisica.Cidade = Console.ReadLine();
-
-                        Console.WriteLine("\nPessoa Fisica Criada");
-                        Console.WriteLine("...............................");
-                        //pessoaFisica.Cpf = Console.ReadLine();
-                        //Console.WriteLine("Pessoa Fisica Criada");
-                        //pessoaFisica.Cpf = Console.ReadLine();
-                        //Console.WriteLine("Pessoa Fisica Criada");
-                        //pessoaFisica.Cpf = Console.ReadLine();
-                        //Console.WriteLine("Pessoa Fisica Criada");
-                        //pessoaFisica.Cpf = Console.ReadLine();
-                        //Console.WriteLine("Pessoa Fisica Criada");
-
-                        break;
-                    case 2:
-                        PessoaJuridica pessoaJuridica = new PessoaJuridica();
-
-                        Console.Write("Informe o nome: ");
-                        pessoaJuridica.Nome = Console.ReadLine();
-
-                        Console.Write("Informe CPF ");
-                        pessoaJuridica.Cnpj = Console.ReadLine();
-
-                        Console.Write("Informe Cidade ");
-                        pessoaJuridica.Cidade = Console.ReadLine();
-
-                        Console.WriteLine("\nRestaurante Criado");
-                        Console.WriteLine("...............................");
-                        break;
-                    case 3:
-                        flag = true;
-                        break;
                 }
             }
         }
 
         private static void FazerPedido()
         {
-            PessoaFisica pessoaFisica = new PessoaFisica();
-            Console.Write("Informe o nome: ");
-            pessoaFisica.Nome = Console.ReadLine();
-
-            Console.Write("Informe o CPF: ");
-            pessoaFisica.Cpf= Console.ReadLine();
-
-            //Console.Write("Informe o nome: ");
-            //cliente.cpf = Console.ReadLine();
 
         }
 

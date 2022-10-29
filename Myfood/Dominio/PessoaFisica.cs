@@ -10,9 +10,6 @@ namespace Myfood.Dominio
     public class PessoaFisica : Pessoa
     {
         private string cpf;
-
-        public string Cpf { get => cpf; set => cpf = value; }
-
         public PessoaFisica() : base()
         { }
 
@@ -34,6 +31,12 @@ namespace Myfood.Dominio
             // Recupera a diferença de anos entre a data de nascimento e a data de hoje.
             int idade = dataAtual.Year - dataNascimento.Year;
 
+        }
+        public void definirCpf(string cpf){
+            this.cpf = cpf;
+        }
+        public string retornarCpf(){
+            return this.cpf;
         }
     }
 }

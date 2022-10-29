@@ -8,12 +8,11 @@ namespace Myfood.Dominio
 {
     public class Cardapio
     {
+        private int id;
         private string produto;
         private string descricao;
         private double valor;
         private string imagem;
-        private int id;
-
 
 
         public string Produto { get => produto; set => produto = value; }

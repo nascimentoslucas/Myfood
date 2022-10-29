@@ -10,22 +10,24 @@ namespace Myfood.Repositorio
 {
     public class PessoaFisicaRepo : BaseRepositorio<PessoaFisica>
     {
+        private PessoaFisicaFakeDB fakeDB = new PessoaFisicaFakeDB();
+
         public override PessoaFisica Create(PessoaFisica instancia)
         {
-            int id = PessoaFisicaFakeDB.PessoasFisicas.Last().Id + 1;
+            int id = fakeDB.PessoasFisicas.Last().Id + 1;
             instancia.Id = id;
-            PessoaFisicaFakeDB.PessoasFisicas.Add(instancia);
+            fakeDB.PessoasFisicas.Add(instancia);
             return instancia;
         }
 
         public override PessoaFisica ReadOne(int chave)
         {
-            return PessoaFisicaFakeDB.PessoasFisicas.SingleOrDefault(pf => pf.Id == chave);
+            return fakeDB.PessoasFisicas.SingleOrDefault(pf => pf.Id == chave);
         }
 
         public override List<PessoaFisica> ReadAll ()
         {
-            return PessoaFisicaFakeDB.PessoasFisicas;
+            return fakeDB.PessoasFisicas;
 
         }
 
@@ -51,7 +53,7 @@ namespace Myfood.Repositorio
             }
             else
             {
-                PessoaFisicaFakeDB.PessoasFisicas.Remove(original);
+                fakeDB.PessoasFisicas.Remove(original);
                 return original;
             }
 

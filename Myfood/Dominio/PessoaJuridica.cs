@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Myfood.Dominio
 {
-    public class PessoaJuridica : Pessoa
+    public abstract class PessoaJuridica : Pessoa
     {
         private string cnpj;
 
