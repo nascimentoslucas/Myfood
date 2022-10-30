@@ -20,7 +20,7 @@ namespace Myfood.Dominio
         {
         }
 
-        public Restaurante(string cnpj, string nome, string email, DateTime dataNascimento, string telefone, string cidade, string password, int id) : base(cnpj, nome, email, dataNascimento, telefone, cidade, password, id)
+        public Restaurante(string endereco, string descricao, string cnpj, string nome, string email, DateTime dataNascimento, string telefone, string cidade, string password, int id) : base(cnpj, nome, email, dataNascimento, telefone, cidade, password, id)
         {
         }
 

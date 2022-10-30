@@ -21,49 +21,100 @@ namespace Myfood
         {
             bool flag = false;
             PessoaFisicaRepo repositorio = new PessoaFisicaRepo();
+            RestauranteRepo repositoriojur = new RestauranteRepo();
 
             while (flag != true)
             {
-
-                Console.WriteLine("1 - Fisica");
-                Console.WriteLine("2 - Juridica (Restaurante)");
-                Console.WriteLine("3 - Voltar");
-                Console.Write("\nSelecione uma das opções:");
+                Console.WriteLine("");
+                Console.WriteLine(" ..............................................");
+                Console.WriteLine(" .            - Bem Vindo ao Myfood -         .");
+                Console.WriteLine(" ..............................................");
+                Console.WriteLine(" .        1 - Fisica                          .");
+                Console.WriteLine(" .        2 - Restaurante (Juridica)          .");
+                Console.WriteLine(" .        3 - Voltar                          .");
+                Console.WriteLine(" ..............................................");
+                Console.Write(" Selecione uma das opções...................:");
                 int opcao = Convert.ToInt32(Console.ReadLine());
                 if(opcao == 1) {
                     salvarPessoaFisica(repositorio);
-                    repositorio.ReadAll().ForEach(x=> Console.WriteLine(x.Nome));
+                    repositorio.ReadAll().ForEach(fis=> Console.WriteLine(" Você já cadastrou: " + fis.Nome));
                 };
                 if(opcao == 2) {
-                    salvarRestaurante();
-                    repositorio.ReadAll().ForEach(x=> Console.WriteLine(x.Nome));
+                    salvarRestaurante(repositoriojur);
+                    repositoriojur.ReadAll().ForEach(jur=> Console.WriteLine(" Você já cadastrou: " + jur.Nome));
                 };
-            }
+                if (opcao == 3) {
+                     flag = true;
+                };
+                if (opcao != 1 && opcao != 2 && opcao != 3) {
+                    Console.WriteLine("");
+                    Console.WriteLine(" Escolha uma das opcões adequadas");
+                };
+        }
         }
 
-        private static void salvarRestaurante()
+        private static void salvarRestaurante(RestauranteRepo repositoriojur)
         {
-            throw new NotImplementedException();
+            {
+                Restaurante jur = new Restaurante("R. Paineiras", "Perto dali", "cnpj","nome", "email", new DateTime (2020,02,22), "00000", "cidade", "999999", 0);
+                
+                Console.Write(" Informe o nome do Restaurante: ");
+                jur.Nome = Console.ReadLine();
+
+                Console.Write(" Informe o CNPJ: ");
+                jur.Cnpj = Console.ReadLine();
+
+                Console.Write(" Informe o Telefone: ");
+                jur.Telefone = Console.ReadLine();
+
+                Console.Write(" Informe o email: ");
+                jur.Email = Console.ReadLine();
+
+                Console.Write(" Informe o Endeço: ");
+                jur.Endereco = Console.ReadLine();
+
+                Console.Write(" Informe Complemento: ");
+                jur.Descricao = Console.ReadLine();
+
+                Console.Write(" Informe a Cidade: ");
+                jur.Cidade = Console.ReadLine();
+                Console.WriteLine(" ..............................................");
+                repositoriojur.Create(jur);
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine(" Restaurante Criado...");
+                Console.WriteLine(" ##############################################");
+            }                       
         }
 
         private static void salvarPessoaFisica(PessoaFisicaRepo repositorio)
         {
-            PessoaFisica pessoa;
-            Console.Write("Informe o nome: ");
-            string nome = Console.ReadLine();
+            PessoaFisica fis = new PessoaFisica("cpf", "nome", "email", new DateTime(2020, 9, 9), "00000", "cidade", "999999", 1);
+            
+            Console.Write(" Informe o nome da Pessoa: ");
+            fis.Nome = Console.ReadLine();
 
-            Console.Write("Informe CPF ");
-            string cpf = Console.ReadLine();
+            Console.Write(" Informe o CPF: ");
+            fis.Cpf = Console.ReadLine();
 
-            Console.Write("Informe Cidade ");
-            string cidade = Console.ReadLine();
+            //Console.Write(" Informe o data de nascimento: ");
+            //fis.DataNascimento = DateTime.Parse(Console.ReadLine());
 
-            pessoa = new PessoaFisica(cpf,nome,"email",new DateTime(2020,9,9),"00000",cidade,"999999",0);
+            Console.Write(" Informe o Telefone: ");
+            fis.Telefone = Console.ReadLine();
 
-            repositorio.Create(pessoa);
+            Console.Write(" Informe o email: ");
+            fis.Email = Console.ReadLine();
 
-            Console.WriteLine("\nPessoa Fisica Criada");
-            Console.WriteLine("...............................");
+            Console.Write(" Informe a Cidade: ");
+            fis.Cidade = Console.ReadLine();
+            Console.WriteLine(" ..............................................");
+
+            repositorio.Create(fis);
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine(" Pessoa Fisica Criada...");
+            Console.WriteLine(" ##############################################");
         }
 
         private static void menu(){
@@ -71,14 +122,15 @@ namespace Myfood
             while (flag != true)
             {
                 Console.Clear();
-                Console.WriteLine("................................................");
-                Console.WriteLine("              - Bem Vindo ao Myfood -" );
-                Console.WriteLine("................................................");
-                Console.WriteLine("1 - Cadastrar Pessoa");
-                Console.WriteLine("2 - Fazer Pedido");
-                Console.WriteLine("3 - Sair\n");
-                //Console.WriteLine("4 - Sair\n");
-                Console.Write("Selecione uma das opções:");
+                Console.WriteLine("");
+                Console.WriteLine(" ..............................................");
+                Console.WriteLine(" .            - Bem Vindo ao Myfood -         ." );       
+                Console.WriteLine(" ..............................................");
+                Console.WriteLine(" .        1 - Cadastrar Pessoa                .");
+                Console.WriteLine(" .        2 - Fazer Pedido                    .");
+                Console.WriteLine(" .        3 - Sair                            ."); 
+                Console.WriteLine(" ..............................................");
+                Console.Write(" Selecione uma das opções...................:");
                 int opcao = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
 
@@ -92,13 +144,9 @@ namespace Myfood
                         break;
                     case 3:
                         flag = true;
-                        //CriarRepositori();
-                        break;
-                    case 4:
-                        flag = true;
                         break;
                     default: 
-                        Console.WriteLine("Escolha uma das opcoes adequadas");
+                        Console.WriteLine(" Escolha uma das opcoes adequadas");
                         break;
                 }
             }
@@ -106,7 +154,7 @@ namespace Myfood
 
         private static void FazerPedido()
         {
-
+            
         }
 
         private static void ExecutaBackup()
