@@ -34,7 +34,7 @@ namespace Myfood
                     salvarPessoaFisica(repositorio);
                     repositorio.ReadAll().ForEach(x=> Console.WriteLine(x.Nome));
                 };
-                if(opcao == 1) {
+                if(opcao == 2) {
                     salvarRestaurante();
                     repositorio.ReadAll().ForEach(x=> Console.WriteLine(x.Nome));
                 };
