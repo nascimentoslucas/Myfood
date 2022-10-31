@@ -15,7 +15,7 @@ namespace Myfood.Servico
 
         public PessoaFisicaServ() : base()
         {
-            this.repositorio = new PessoaFisicaRepo();
+ //           this.repositorio = new PessoaFisicaRepo();
         }
         public override List<PessoaFisica> Brose()
         {

@@ -11,7 +11,7 @@ namespace Myfood.FakeDB
 {
     public class FakeDataBase
     {
-        public  List<PessoaFisica> PessoasFisicas = new List<PessoaFisica>();
+        public List<PessoaFisica> PessoasFisicas = new List<PessoaFisica>();
         public List<Restaurante> Restaurantes = new List<Restaurante>();
         public List<Cardapio> cardapios = new List<Cardapio>();
         public List<Pedido> Pedidos = new List<Pedido>();

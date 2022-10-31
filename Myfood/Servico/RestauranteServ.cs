@@ -14,7 +14,7 @@ namespace Myfood.Servico
 
         public RestauranteServ() : base()
         {
-            this.repositoriojur = new RestauranteRepo();
+            //this.repositoriojur = new RestauranteRepo();
         }
         public override List<Restaurante> Brose()
         {
