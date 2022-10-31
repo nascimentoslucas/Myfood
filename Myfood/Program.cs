@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Myfood.Dominio;
+using Myfood.FakeDB;
 using Myfood.Repositorio;
 using Myfood.Servico;
 
@@ -11,17 +12,54 @@ namespace Myfood
 {
     public class Program
     {
-               
+
         public static void Main(string[] args)
         {
-            menu();
-        }
+            FakeDataBase fakeDB = new FakeDataBase();
 
-        private static void CadastrarPessoa()
+            menu(fakeDB);
+        }
+        private static void menu(FakeDataBase fakeDB)
         {
             bool flag = false;
-            PessoaFisicaRepo repositorio = new PessoaFisicaRepo();
-            RestauranteRepo repositoriojur = new RestauranteRepo();
+            while (flag != true)
+            {
+                Console.Clear();
+                Console.WriteLine("");
+                Console.WriteLine(" ..............................................");
+                Console.WriteLine(" .            - Bem Vindo ao Myfood -         .");
+                Console.WriteLine(" ..............................................");
+                Console.WriteLine(" .        1 - Cadastrar Pessoa                .");
+                Console.WriteLine(" .        2 - Fazer Pedido                    .");
+                Console.WriteLine(" .        3 - Sair                            .");
+                Console.WriteLine(" ..............................................");
+                Console.Write(" Selecione uma das opções...................:");
+                int opcao = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
+
+                switch (opcao)
+                {
+                    case 1:
+                        CadastrarPessoa(fakeDB);
+                        break;
+                    case 2:
+                        FazerPedido();
+                        break;
+                    case 3:
+                        flag = true;
+                        break;
+                    default:
+                        Console.WriteLine(" Escolha uma das opcoes adequadas");
+                        break;
+                }
+            }
+        }
+
+        private static void CadastrarPessoa(FakeDataBase fakeDB)
+        {
+            bool flag = false;
+            PessoaFisicaRepo repositorio = new PessoaFisicaRepo(fakeDB);
+            RestauranteRepo repositoriojur = new RestauranteRepo(fakeDB);
 
             while (flag != true)
             {
@@ -35,29 +73,33 @@ namespace Myfood
                 Console.WriteLine(" ..............................................");
                 Console.Write(" Selecione uma das opções...................:");
                 int opcao = Convert.ToInt32(Console.ReadLine());
-                if(opcao == 1) {
+                if (opcao == 1)
+                {
                     salvarPessoaFisica(repositorio);
-                    repositorio.ReadAll().ForEach(fis=> Console.WriteLine(" Você já cadastrou: " + fis.Nome));
+                    repositorio.ReadAll().ForEach(fis => Console.WriteLine(" Você já cadastrou: " + fis.Nome));
                 };
-                if(opcao == 2) {
+                if (opcao == 2)
+                {
                     salvarRestaurante(repositoriojur);
-                    repositoriojur.ReadAll().ForEach(jur=> Console.WriteLine(" Você já cadastrou: " + jur.Nome));
+                    repositoriojur.ReadAll().ForEach(jur => Console.WriteLine(" Você já cadastrou: " + jur.Nome));
                 };
-                if (opcao == 3) {
-                     flag = true;
+                if (opcao == 3)
+                {
+                    flag = true;
                 };
-                if (opcao != 1 && opcao != 2 && opcao != 3) {
+                if (opcao != 1 && opcao != 2 && opcao != 3)
+                {
                     Console.WriteLine("");
                     Console.WriteLine(" Escolha uma das opcões adequadas");
                 };
-        }
+            }
         }
 
         private static void salvarRestaurante(RestauranteRepo repositoriojur)
         {
             {
-                Restaurante jur = new Restaurante("R. Paineiras", "Perto dali", "cnpj","nome", "email", new DateTime (2020,02,22), "00000", "cidade", "999999", 0);
-                
+                Restaurante jur = new Restaurante("R. Paineiras", "Perto dali", "cnpj", "nome", "email", new DateTime(2020, 02, 22), "00000", "cidade", "999999", 0);
+
                 Console.Write(" Informe o nome do Restaurante: ");
                 jur.Nome = Console.ReadLine();
 
@@ -84,13 +126,13 @@ namespace Myfood
                 Console.WriteLine("");
                 Console.WriteLine(" Restaurante Criado...");
                 Console.WriteLine(" ##############################################");
-            }                       
+            }
         }
 
         private static void salvarPessoaFisica(PessoaFisicaRepo repositorio)
         {
             PessoaFisica fis = new PessoaFisica("cpf", "nome", "email", new DateTime(2020, 9, 9), "00000", "cidade", "999999", 1);
-            
+
             Console.Write(" Informe o nome da Pessoa: ");
             fis.Nome = Console.ReadLine();
 
@@ -117,44 +159,10 @@ namespace Myfood
             Console.WriteLine(" ##############################################");
         }
 
-        private static void menu(){
-            bool flag = false;
-            while (flag != true)
-            {
-                Console.Clear();
-                Console.WriteLine("");
-                Console.WriteLine(" ..............................................");
-                Console.WriteLine(" .            - Bem Vindo ao Myfood -         ." );       
-                Console.WriteLine(" ..............................................");
-                Console.WriteLine(" .        1 - Cadastrar Pessoa                .");
-                Console.WriteLine(" .        2 - Fazer Pedido                    .");
-                Console.WriteLine(" .        3 - Sair                            ."); 
-                Console.WriteLine(" ..............................................");
-                Console.Write(" Selecione uma das opções...................:");
-                int opcao = Convert.ToInt32(Console.ReadLine());
-                Console.Clear();
-
-                switch (opcao)
-                {
-                    case 1:
-                        CadastrarPessoa();
-                        break;
-                    case 2:
-                        FazerPedido();
-                        break;
-                    case 3:
-                        flag = true;
-                        break;
-                    default: 
-                        Console.WriteLine(" Escolha uma das opcoes adequadas");
-                        break;
-                }
-            }
-        }
 
         private static void FazerPedido()
         {
-            
+
         }
 
         private static void ExecutaBackup()

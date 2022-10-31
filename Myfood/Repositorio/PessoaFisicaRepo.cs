@@ -10,8 +10,12 @@ namespace Myfood.Repositorio
 {
     public class PessoaFisicaRepo : BaseRepositorio<PessoaFisica>
     {
-        private FakeDataBase fakeDB = new FakeDataBase();
+        private FakeDataBase fakeDB;
 
+        public PessoaFisicaRepo(FakeDataBase _fakeDB)
+        {
+            this.fakeDB = _fakeDB;
+        }
         public override PessoaFisica Create(PessoaFisica instancia)
         {
             int id = fakeDB.PessoasFisicas.Count() > 0 ? fakeDB.PessoasFisicas.Last().Id + 1 : 1;
@@ -25,7 +29,7 @@ namespace Myfood.Repositorio
             return fakeDB.PessoasFisicas.SingleOrDefault(pf => pf.Id == chave);
         }
 
-        public override List<PessoaFisica> ReadAll ()
+        public override List<PessoaFisica> ReadAll()
         {
             return fakeDB.PessoasFisicas;
 

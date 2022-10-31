@@ -10,7 +10,11 @@ namespace Myfood.Repositorio
 {
     public class RestauranteRepo : BaseRepositorio<Restaurante>
     {
-        private FakeDataBase fakeDB = new FakeDataBase();
+        private FakeDataBase fakeDB;
+
+        public RestauranteRepo(FakeDataBase _fakeDB){
+            this.fakeDB = _fakeDB;
+        }
 
         public override Restaurante Create(Restaurante instancia)
         {
