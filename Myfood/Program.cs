@@ -16,7 +16,7 @@ namespace Myfood
         public static void Main(string[] args)
         {
             FakeDataBase fakeDB = new FakeDataBase();
-
+            fakeDB.cardapios = Preencher();
             menu(fakeDB);
         }
         private static void menu(FakeDataBase fakeDB)
@@ -43,7 +43,7 @@ namespace Myfood
                         CadastrarPessoa(fakeDB);
                         break;
                     case 2:
-                        FazerPedido();
+                        FazerPedido(fakeDB);
                         break;
                     case 3:
                         flag = true;
@@ -53,6 +53,24 @@ namespace Myfood
                         break;
                 }
             }
+        }
+
+        private static void FazerPedido(FakeDataBase fakeDB)
+        {
+            RestauranteRepo repositoriojur = new RestauranteRepo(fakeDB);
+
+
+            Restaurante restaurante = repositoriojur.ReadOne(1);
+
+            restaurante.cardapios.ForEach(x=> {
+                Console.WriteLine(x.Descricao);
+            });
+           Cardapio cardapioExcolheu = fakeDB.cardapios.SingleOrDefault();
+
+           Pedido pedido = new Pedido(1,cardapioExcolheu);
+
+           fakeDB.Pedidos.Add(pedido);
+
         }
 
         private static void CadastrarPessoa(FakeDataBase fakeDB)
@@ -160,11 +178,13 @@ namespace Myfood
         }
 
 
-        private static void FazerPedido()
-        {
+        private static  List<Cardapio>  Preencher()
+        {   List<Cardapio> cardapios = new List<Cardapio>();
+            Cardapio cardapio = new Cardapio("COCA", "QUENTE", 234, "IMAGEM", 1);
+            cardapios.Add(cardapio);
 
+            return cardapios;
         }
-
         private static void ExecutaBackup()
         {
             throw new NotImplementedException();

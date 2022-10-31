@@ -9,5 +9,12 @@ namespace Myfood.Dominio
     public class Pedido
     {
         private int id;
+        private Cardapio cardapio;
+
+        public Pedido(int id,Cardapio cardapio){
+            this.id = id;
+            this.cardapio = cardapio;
+        }
     }
+
 }

@@ -15,7 +15,7 @@ namespace Myfood.Dominio
         private string descricao;
 
         private int cardapioId;
-
+        public List<Cardapio> cardapios;
         public Restaurante()
         {
         }
